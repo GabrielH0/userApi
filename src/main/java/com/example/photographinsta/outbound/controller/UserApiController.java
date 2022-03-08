@@ -56,4 +56,22 @@ public class UserApiController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    @PostMapping("/inactivate")
+    public ResponseEntity<UserRepresentation> inactivateUser(@RequestBody String username) {
+        UserRepresentation userRepresentationResponse = userBaseController.inactivateUser(username);
+        if (userRepresentationResponse != null) {
+            return new ResponseEntity<>(userRepresentationResponse, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping
+    public ResponseEntity<UserRepresentation> updateUser(@RequestBody UserRepresentation userRepresentation) {
+        UserRepresentation userRepresentationResponse = userBaseController.updateUser(userRepresentation);
+        if (userRepresentationResponse != null) {
+            return new ResponseEntity<>(userRepresentationResponse, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }

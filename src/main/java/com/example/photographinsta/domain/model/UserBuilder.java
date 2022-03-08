@@ -7,6 +7,7 @@ public final class UserBuilder {
     private String password;
     private LocalDate birthDate;
     private String occupation;
+    private boolean active = true;
 
     public UserBuilder(String username, String password) {
         this.username = username;
@@ -33,7 +34,12 @@ public final class UserBuilder {
         return this;
     }
 
+    public UserBuilder withActive(boolean active) {
+        this.active = active;
+        return this;
+    }
+
     public User build() {
-        return new User(username, password, birthDate, occupation);
+        return new User(username, password, birthDate, occupation, active);
     }
 }

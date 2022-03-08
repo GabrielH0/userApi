@@ -26,19 +26,26 @@ public class UserInteractorTest {
         userRepository = Mockito.mock(UserRepository.class);
         userInteractor = new UserInteractor(userRepository);
         user = new User("Gabriel", "123",  LocalDate.of(1999, 9, 20),
-                "Developer");
+                "Developer", true);
     }
 
     @Test
     public void newUserTest() throws AlreadyExistsException {
-        userInteractor.saveUser(user);
+        Mockito.when(userRepository.save(user)).thenReturn(user);
+        Assertions.assertNotNull(userInteractor.saveUser(user));
     }
 
     @Test
     public void newUser_usernameInUseShouldThrowExceptionTest() {
         Mockito.when(userRepository.findByUsername("Gabriel")).thenReturn(new User("Gabriel", "123",
-                LocalDate.of(1999, 9, 20), "Developer"));
+                LocalDate.of(1999, 9, 20), "Developer", true));
         Assertions.assertThrows(AlreadyExistsException.class,
                 () -> userInteractor.saveUser(user));
+    }
+
+    @Test
+    public void updateUserTest() {
+        Mockito.when(userRepository.save(user)).thenReturn(user);
+        Assertions.assertNotNull(userInteractor.updateUser(user));
     }
 }

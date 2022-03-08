@@ -12,11 +12,14 @@ public class User {
 
     private String occupation;
 
-    public User(String username, String password, LocalDate birthDate, String occupation) {
+    private boolean active = true;
+
+    public User(String username, String password, LocalDate birthDate, String occupation, boolean active) {
         this.username = username;
         this.password = password;
         this.birthDate = birthDate;
         this.occupation = occupation;
+        this.active = active;
         this.validate();
     }
 
@@ -82,5 +85,13 @@ public class User {
 
     public void setOccupation(String occupation) {
         this.occupation = occupation;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

@@ -6,7 +6,8 @@ public final class UserDatabaseBuilder {
     private final String username;
     private final String password;
     private LocalDate birthDate;
-    private String occupation;
+    private String ocupation;
+    private boolean active = true;
 
     public UserDatabaseBuilder(String username, String password) {
         this.username = username;
@@ -19,16 +20,21 @@ public final class UserDatabaseBuilder {
     }
 
     public UserDatabaseBuilder withOccupation(String occupation) {
-        this.occupation = occupation;
+        this.ocupation = occupation;
+        return this;
+    }
+
+    public UserDatabaseBuilder withActive(boolean active) {
+        this.active = active;
         return this;
     }
 
     public UserDatabase build() {
-        UserDatabase userDatabase = new UserDatabase();
+        UserDatabase userDatabase = new UserDatabase(username, password, birthDate, ocupation, active);
         userDatabase.setUsername(username);
         userDatabase.setPassword(password);
         userDatabase.setBirthDate(birthDate);
-        userDatabase.setOccupation(occupation);
+        userDatabase.setOccupation(ocupation);
         return userDatabase;
     }
 }

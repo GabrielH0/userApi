@@ -36,4 +36,15 @@ public class PostgresUserRepostory implements UserRepository {
                         .build());
         return userDatabase.toUser();
     }
+
+    @Override
+    public User inactivate(String username) {
+        User user = findByUsername(username);
+        UserDatabase inactivatedUser = new UserDatabaseBuilder(user.getUsername(), user.getPassword())
+                .withBirthDate(user.getBirthDate())
+                .withOccupation(user.getOccupation())
+                .withActive(false)
+                .build();
+        return userJpaRepository.save(inactivatedUser).toUser();
+    }
 }

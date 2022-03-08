@@ -27,18 +27,21 @@ public class UserDatabase {
 
     private String occupation;
 
-    public UserDatabase(String username, String password, LocalDate birthDate, String occupation) {
+    private boolean active = true;
+
+    public UserDatabase(String username, String password, LocalDate birthDate, String occupation, boolean active) {
         this.username = username;
         this.password = password;
         this.birthDate = birthDate;
         this.occupation = occupation;
+        this.active = active;
     }
 
     protected UserDatabase() {
     }
 
     public User toUser() {
-        return new User(username, password, birthDate, occupation);
+        return new User(username, password, birthDate, occupation, active);
     }
 
     private Long createId() {
@@ -79,5 +82,13 @@ public class UserDatabase {
 
     public void setOccupation(String occupation) {
         this.occupation = occupation;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

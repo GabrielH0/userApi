@@ -29,31 +29,31 @@ public class UserTest {
     @Test
     public void newUser_usernameNullShouldThrowIllegalArgumentException() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> new User(null, user.getPassword(),
-                user.getBirthDate(), user.getOccupation()));
+                user.getBirthDate(), user.getOccupation(), true));
     }
 
     @Test
     public void newUser_passwordNullShouldThrowIllegalArgumentException() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> new User(user.getUsername(), null,
-                user.getBirthDate(), user.getOccupation()));
+                user.getBirthDate(), user.getOccupation(), true));
     }
 
     @Test
     public void newUser_birthDateNullShoudlPass() {
         Assertions.assertNotNull(new User(user.getUsername(), user.getPassword(),
-                null, user.getOccupation()));
+                null, user.getOccupation(), true));
     }
 
     @Test
     public void newUser_birhtDateTooOldShoudlThrowIllegalArgumentException() {
         Assertions.assertThrows(IllegalArgumentException.class, () ->  new User(user.getUsername(), user.getPassword(),
-                LocalDate.of(1800, 1, 1), user.getOccupation()));
+                LocalDate.of(1800, 1, 1), user.getOccupation(), true));
     }
 
     @Test
     public void newUser_birhtDateAfterNowshoudlThrowIllegalArgumentException() {
         Assertions.assertThrows(IllegalArgumentException.class, () ->  new User(user.getUsername(), user.getPassword(),
-                LocalDate.of(LocalDate.now().plusYears(1).getYear(), 1, 1), user.getOccupation()));
+                LocalDate.of(LocalDate.now().plusYears(1).getYear(), 1, 1), user.getOccupation(), true));
     }
 
 }

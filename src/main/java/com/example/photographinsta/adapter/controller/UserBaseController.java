@@ -22,4 +22,13 @@ public class UserBaseController {
     public UserRepresentation findByUsername(String username) {
         return UserRepresentation.toUserRepresentation(userInteractor.findByUsername(username));
     }
+
+    public UserRepresentation inactivateUser(String username) {
+        return UserRepresentation.toUserRepresentation(userInteractor.inactivateUser(username));
+    }
+
+    public UserRepresentation updateUser(UserRepresentation userRepresentation) {
+        User user = userInteractor.updateUser(userRepresentation.toUserModelRepresentation());
+        return UserRepresentation.toUserRepresentation(user);
+    }
 }
