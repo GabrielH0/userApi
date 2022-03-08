@@ -7,7 +7,7 @@ import com.example.photographinsta.useCase.UserInteractor;
 
 public class UserBaseController {
 
-    private UserInteractor userInteractor;
+    private final UserInteractor userInteractor;
 
 
     public UserBaseController(UserInteractor userInteractor) {

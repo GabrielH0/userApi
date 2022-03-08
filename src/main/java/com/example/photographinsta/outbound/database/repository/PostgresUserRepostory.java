@@ -11,7 +11,7 @@ import javax.inject.Named;
 @Named
 public class PostgresUserRepostory implements UserRepository {
 
-    private UserJpaRepository userJpaRepository;
+    private final UserJpaRepository userJpaRepository;
 
     @Autowired
     public PostgresUserRepostory(UserJpaRepository userJpaRepository) {
@@ -29,11 +29,11 @@ public class PostgresUserRepostory implements UserRepository {
 
     @Override
     public User save(User user) {
-        UserDatabase userDatabase = userJpaRepository.save(UserDatabaseBuilder
-                .userDatabase()
-                .withUsername(user.getUsername())
-                .withPassword(user.getPassword())
-                .build());
+        UserDatabase userDatabase = userJpaRepository.save(
+                new UserDatabaseBuilder(user.getUsername(), user.getPassword())
+                        .withBirthDate(user.getBirthDate())
+                        .withOccupation(user.getOccupation())
+                        .build());
         return userDatabase.toUser();
     }
 }

@@ -6,7 +6,7 @@ import com.example.photographinsta.exception.AlreadyExistsException;
 
 public class UserInteractor {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public UserInteractor(UserRepository userRepository) {
         this.userRepository = userRepository;

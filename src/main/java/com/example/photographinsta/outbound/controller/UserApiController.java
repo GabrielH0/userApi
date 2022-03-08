@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Api( value = "User management resource", description = "User management")
 public class UserApiController {
 
-    private UserBaseController userBaseController;
+    private final UserBaseController userBaseController;
 
     @Autowired
     public UserApiController(UserBaseController userBaseController) {
