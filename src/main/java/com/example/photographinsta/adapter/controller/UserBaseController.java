@@ -4,12 +4,13 @@ import com.example.photographinsta.adapter.model.UserRepresentation;
 import com.example.photographinsta.domain.model.User;
 import com.example.photographinsta.exception.AlreadyExistsException;
 import com.example.photographinsta.useCase.UserInteractor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserBaseController {
 
     private final UserInteractor userInteractor;
 
-
+    @Autowired
     public UserBaseController(UserInteractor userInteractor) {
         this.userInteractor = userInteractor;
     }

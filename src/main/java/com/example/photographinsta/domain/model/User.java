@@ -12,7 +12,7 @@ public class User {
 
     private String occupation;
 
-    private boolean active = true;
+    private boolean active;
 
     public User(String username, String password, LocalDate birthDate, String occupation, boolean active) {
         this.username = username;
