@@ -5,12 +5,13 @@ services:
     image: 'userapi:lastest'
     build:
       context: .
-    container_name: app
+    container_name: userapi
     ports:
       - "8080:8080"
     depends_on:
       - postgres
     environment:
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/userapi
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres

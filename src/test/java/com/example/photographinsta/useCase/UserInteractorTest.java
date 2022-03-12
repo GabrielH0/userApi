@@ -37,7 +37,7 @@ public class UserInteractorTest {
 
     @Test
     public void newUser_usernameInUseShouldThrowExceptionTest() {
-        Mockito.when(userRepository.findByUsername("Gabriel")).thenReturn(new User("Gabriel", "123",
+        Mockito.when(userRepository.findByUsername("Gabriel1")).thenReturn(new User("Gabriel", "123",
                 LocalDate.of(1999, 9, 20), "Developer", true));
         Assertions.assertThrows(AlreadyExistsException.class,
                 () -> userInteractor.saveUser(user));
