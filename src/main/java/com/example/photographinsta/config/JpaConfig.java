@@ -30,7 +30,6 @@ public class JpaConfig {
         dataSource.setUsername(env.getProperty("spring.datasource.username"));
         dataSource.setPassword(env.getProperty("spring.datasource.password"));
         Properties properties = new Properties();
-        properties.setProperty("spring.jpa.generate-ddl", env.getProperty("spring.jpa.generate-ddl"));
         dataSource.setConnectionProperties(properties);
         return dataSource;
     }

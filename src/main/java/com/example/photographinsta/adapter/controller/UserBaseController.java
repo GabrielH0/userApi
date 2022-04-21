@@ -4,6 +4,7 @@ import com.example.photographinsta.adapter.model.UserRepresentation;
 import com.example.photographinsta.domain.model.User;
 import com.example.photographinsta.exception.AlreadyExistsException;
 import com.example.photographinsta.useCase.UserInteractor;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserBaseController {
@@ -20,8 +21,13 @@ public class UserBaseController {
         return UserRepresentation.toUserRepresentation(user);
     }
 
-    public UserRepresentation findByUsername(String username) {
+    public UserRepresentation findByUsername(String username) throws NotFoundException {
+        User user = userInteractor.findByUsername(username);
+        if (user == null) {
+            throw new NotFoundException("User not found");
+        }
         return UserRepresentation.toUserRepresentation(userInteractor.findByUsername(username));
+
     }
 
     public UserRepresentation inactivateUser(String username) {

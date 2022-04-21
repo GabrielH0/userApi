@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,12 +50,15 @@ public class UserApiController {
             }
     )
     @GetMapping("/{username}")
-    public ResponseEntity<UserRepresentation> findByUsername(@PathVariable("username") String username) {
-        UserRepresentation userRepresentationResponse = userBaseController.findByUsername(username);
-        if (userRepresentationResponse != null) {
-            return new ResponseEntity<>(userRepresentationResponse, HttpStatus.OK);
+    public ResponseEntity<Object> findByUsername(@PathVariable("username") String username) {
+        UserRepresentation userRepresentationResponse = null;
+        try {
+            userRepresentationResponse = userBaseController.findByUsername(username);
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(userRepresentationResponse, HttpStatus.OK);
     }
 
     @PostMapping("/inactivate")

@@ -1,11 +1,10 @@
-version: '3.8'
+version: '3'
 
 services:
   app:
-    image: 'userapi:lastest'
-    build:
-      context: .
-    container_name: userapi
+    image: 'gabrielh0/userapi:lastest'
+    build: .
+    container_name: userapi_aws
     ports:
       - "8080:8080"
     depends_on:
@@ -15,7 +14,6 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/userapi
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
   postgres:
     image: postgres:13.2-alpine
@@ -24,7 +22,10 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - APP_DB_NAME=userapi
       - LANG=pt_BR.utf8
+      - POSTGRES_DB=userapi
+    hostname: postgres
     ports:
       - '5432:5432'
     volumes:

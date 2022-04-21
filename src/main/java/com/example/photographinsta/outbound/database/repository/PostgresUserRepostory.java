@@ -7,6 +7,7 @@ import com.example.photographinsta.outbound.database.model.UserDatabaseBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.inject.Named;
+import java.util.Optional;
 
 @Named
 public class PostgresUserRepostory implements UserRepository {
@@ -20,9 +21,9 @@ public class PostgresUserRepostory implements UserRepository {
 
     @Override
     public User findByUsername(String username) {
-        UserDatabase user = userJpaRepository.findByUsername(username);
-        if (user != null) {
-            return user.toUser();
+        Optional<UserDatabase> user = userJpaRepository.findByUsername(username);
+        if (user.isPresent()) {
+            return user.get().toUser();
         }
         return null;
     }
