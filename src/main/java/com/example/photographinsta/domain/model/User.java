@@ -1,8 +1,9 @@
 package com.example.photographinsta.domain.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class User {
+public class User implements Serializable {
 
     private String username;
 

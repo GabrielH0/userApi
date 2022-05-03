@@ -33,12 +33,12 @@ public class UserApiController {
             }
     )
     @PostMapping
-    public ResponseEntity<UserRepresentation> newUser(@RequestBody UserRepresentation userRepresentation) {
+    public ResponseEntity<?> newUser(@RequestBody UserRepresentation userRepresentation) {
         try {
             UserRepresentation userRepresentationResponse = userBaseController.newUser(userRepresentation);
             return new ResponseEntity<>(userRepresentationResponse, HttpStatus.OK);
         } catch (AlreadyExistsException alreadyExistsException) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(alreadyExistsException.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 

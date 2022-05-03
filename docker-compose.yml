@@ -49,7 +49,24 @@ services:
       - postgres
     links:
       - 'postgres:postgres-13'
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq/
+      - rabbitmq_log:/var/log/rabbitmq/
+    networks:
+      - rabbitmq_net
 
 volumes:
   postgres_data: {}
   pgadmin_data: {}
+  rabbitmq_data:
+  rabbitmq_log:
+
+networks:
+  rabbitmq_net:
+    driver: bridge
